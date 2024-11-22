@@ -61,24 +61,30 @@ cd video-game-store
    ```sql
    -- Create the database
    CREATE DATABASE videogame_store;
+   ```
+   ```sql
    \c videogame_store;
-
+   ```
+   ```sql
    -- Create the inventory table
    CREATE TABLE inventory (
        game VARCHAR(100) PRIMARY KEY,
        price INTEGER,
        stock INTEGER
    );
-
+   ```
+   ```sql
    -- Create the total revenue table
    CREATE TABLE total_revenue (
        id SERIAL PRIMARY KEY,
        revenue INTEGER
    );
-
+   ```
+   ```sql
    -- Initialize total revenue
    INSERT INTO total_revenue (revenue) VALUES (0);
-
+   ```
+   ```sql
    -- Insert initial inventory data
    INSERT INTO inventory (game, price, stock) VALUES
    ('The Legend of Zelda: Breath of the Wild', 70, 10),
