@@ -8,7 +8,7 @@ conn = psycopg2.connect(
     port=5433,
     database="videogame_store",
     user="postgres",
-    password="yourpassword"  # Use the same password you set earlier
+    password="123456"  # Use the same password you set earlier
 )
 cur = conn.cursor()
 
@@ -69,35 +69,41 @@ def update_display():
 # Create the main window
 root = tk.Tk()
 root.title("Simulación - Tienda de Videojuegos")
+root.geometry("600x400")
+root.configure(bg="#2C3E50")
+
+# Title label
+title_label = tk.Label(root, text="Tienda de Videojuegos", font=("Helvetica", 20, "bold"), fg="white", bg="#2C3E50", pady=10)
+title_label.pack()
 
 # Widgets for each game
 display_widgets = {}
 
 for idx, (game, data) in enumerate(inventory.items()):
-    frame = tk.Frame(root, pady=10)
-    frame.pack(fill=tk.X)
+    frame = tk.Frame(root, bg="#34495E", pady=10, padx=10, relief="groove", borderwidth=2)
+    frame.pack(fill=tk.X, padx=10, pady=5)
 
-    tk.Label(frame, text=game, font=("Arial", 14)).pack(anchor="w")
-    price_label = tk.Label(frame, text=f"Precio: ${data['price']}", font=("Arial", 12))
+    tk.Label(frame, text=game, font=("Helvetica", 16, "bold"), fg="white", bg="#34495E").pack(anchor="w")
+    price_label = tk.Label(frame, text=f"Precio: ${data['price']}", font=("Helvetica", 14), fg="#E74C3C", bg="#34495E")
     price_label.pack(anchor="w")
 
-    stock_label = tk.Label(frame, text=f"Stock: {data['stock']}", font=("Arial", 12))
+    stock_label = tk.Label(frame, text=f"Stock: {data['stock']}", font=("Helvetica", 14), fg="#1ABC9C", bg="#34495E")
     stock_label.pack(anchor="w")
 
-    btn_frame = tk.Frame(frame)
+    btn_frame = tk.Frame(frame, bg="#34495E")
     btn_frame.pack(anchor="w")
 
-    purchase_btn = tk.Button(btn_frame, text="Comprar", command=lambda g=game: purchase(g))
+    purchase_btn = tk.Button(btn_frame, text="Comprar", command=lambda g=game: purchase(g), bg="#E67E22", fg="white", font=("Helvetica", 12), padx=10, pady=5)
     purchase_btn.pack(side=tk.LEFT, padx=5)
 
-    restock_btn = tk.Button(btn_frame, text="Reponer", command=lambda g=game: restock(g))
+    restock_btn = tk.Button(btn_frame, text="Reponer", command=lambda g=game: restock(g), bg="#3498DB", fg="white", font=("Helvetica", 12), padx=10, pady=5)
     restock_btn.pack(side=tk.LEFT, padx=5)
 
     # Save references for dynamic updates
     display_widgets[game] = {"price_label": price_label, "stock_label": stock_label}
 
 # Label to display total revenue
-revenue_label = tk.Label(root, text=f"Total recaudado: ${total_revenue}", font=("Arial", 14), pady=10)
+revenue_label = tk.Label(root, text=f"Total recaudado: ${total_revenue}", font=("Helvetica", 16, "bold"), fg="white", bg="#2C3E50", pady=10)
 revenue_label.pack()
 
 # Run the application
