@@ -5,7 +5,7 @@ import psycopg2
 # Connect to PostgreSQL database
 conn = psycopg2.connect(
     host="localhost",
-    port=5433,
+    port=5434,
     database="videogame_store",
     user="postgres",
     password="123456"  # Use the same password you set earlier
@@ -69,7 +69,21 @@ def update_display():
 # Create the main window
 root = tk.Tk()
 root.title("Simulación - Tienda de Videojuegos")
-root.geometry("600x400")
+
+# Set the size of the window
+window_width = 900
+window_height = 700
+
+# Get the screen width and height
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+# Calculate the position to center the window
+position_x = (screen_width // 2) - (window_width // 2)
+position_y = (screen_height // 2) - (window_height // 2)
+
+# Set the geometry of the window
+root.geometry(f"{window_width}x{window_height}+{position_x}+{position_y}")
 root.configure(bg="#2C3E50")
 
 # Title label
